@@ -5,10 +5,10 @@ services:
     build:
       context: ../..
       dockerfile: Dockerfile
-      container_name: evolution-go-teste-patch
-      restart: unless-stopped
-      ports:
-        - "4001:4000"
+    container_name: evolution-go-teste-patch
+    restart: unless-stopped
+    ports:
+      - "4001:4000"
     environment:
       # Servidor
       SERVER_PORT: 4000
