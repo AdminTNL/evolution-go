@@ -81,7 +81,7 @@ type CreateGroupStruct struct {
 }
 
 type AddParticipantStruct struct {
-	GroupJID     types.JID                   `json:"groupJid"`
+	GroupJID     string                   `json:"groupJid"`
 	Participants []string                    `json:"participants"`
 	Action       whatsmeow.ParticipantChange `json:"action"`
 }
@@ -386,6 +386,10 @@ func (g *groupService) UpdateParticipant(data *AddParticipantStruct, instance *i
 	if err != nil {
 		return err
 	}
+	   	groupRecipient, ok := utils.ParseJID(data.GroupJID)
+   	if !ok {
+   		return errors.New("invalid group jid")
+   	}
 
 	var participants []types.JID
 	for _, participant := range data.Participants {
@@ -397,7 +401,7 @@ func (g *groupService) UpdateParticipant(data *AddParticipantStruct, instance *i
 		}
 	}
 
-	_, err = client.UpdateGroupParticipants(context.Background(), data.GroupJID, participants, data.Action)
+	_, err = client.UpdateGroupParticipants(context.Background(), groupRecipient, participants, data.Action)
 	if err != nil {
 		g.loggerWrapper.GetLogger(instance.Id).LogError("[%s] error create group: %v", instance.Id, err)
 		return err
