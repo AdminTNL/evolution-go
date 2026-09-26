@@ -2,18 +2,20 @@ version: '3.8'
 
 services:
   evolution-go:
-    image: evoapicloud/evolution-go:latest
-    container_name: evolution-go
-    restart: unless-stopped
-    ports:
-      - "4000:4000"
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      container_name: evolution-go-teste-patch
+      restart: unless-stopped
+      ports:
+        - "4001:4000"
     environment:
       # Servidor
       SERVER_PORT: 4000
       CLIENT_NAME: "evolution"
 
       # Segurança (OBRIGATÓRIO)
-      GLOBAL_API_KEY: "sua-chave-api-segura-aqui"
+      GLOBAL_API_KEY: "teste-patch-9x7k4"
 
       # Banco de Dados PostgreSQL (RECOMENDADO)
       POSTGRES_AUTH_DB: "postgresql://postgres:postgres@postgres:5432/evogo_auth?sslmode=disable"
@@ -69,14 +71,14 @@ services:
 
   postgres:
     image: postgres:15-alpine
-    container_name: evolution-postgres
+    container_name: evolution-postgres-teste-patch
     restart: unless-stopped
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
