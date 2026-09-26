@@ -345,7 +345,7 @@ func (g *groupHandler) UpdateParticipant(ctx *gin.Context) {
 		return
 	}
 
-	if data.GroupJID.String() == "" {
+	if data.GroupJID == "" {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": "groupJid is required"})
 		return
 	}
