@@ -2,10 +2,7 @@ version: '3.8'
 
 services:
   evolution-go:
-    build:
-      context: ../..
-      dockerfile: Dockerfile
-    container_name: evolution-go-teste-patch
+    image: ghcr.io/admintnl/evolution-go:latest
     restart: unless-stopped
     ports:
       - "4001:4000"
