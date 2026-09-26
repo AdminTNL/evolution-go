@@ -91,4 +91,4 @@ volumes:
 
 networks:
   evolution_network:
-    driver: bridge
+    driver: overlay
