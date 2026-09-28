@@ -356,7 +356,7 @@ func (g *groupHandler) UpdateParticipant(ctx *gin.Context) {
 	}
 
 	if len(data.Participants) < 1 {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "participants are required"})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "FORK-OK participants are required"})
 		return
 	}
 
