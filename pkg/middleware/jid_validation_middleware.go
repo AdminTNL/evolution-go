@@ -76,7 +76,7 @@ func (m *JIDValidationMiddleware) ValidateJIDFields(fieldNames ...string) gin.Ha
 						modified = true
 						logger.LogDebug("Normalized %s from %s to %s", fieldName, strValue, normalizedJID)
 					}
-				} else if strValue == "" {
+				} else if ok && strValue == "" {
 					c.JSON(http.StatusBadRequest, gin.H{
 						"error": fmt.Sprintf("%s is required and cannot be empty", fieldName),
 					})
